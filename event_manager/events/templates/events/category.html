@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{category}}
+{% endblock %}
+
+{% block content %}
+
+    {% comment %}
+    hier kann alles reingeschrieben werden, wird nicht von der Template-Engine gerendert
+    {% endcomment %}
+
+    <a href="{% url 'events:categories' %}">zurück zur Kategorieübersicht</a><br>
+    {{category}}
+
+{% endblock %}

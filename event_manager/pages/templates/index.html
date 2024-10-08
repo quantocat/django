@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Event Project Homepage
+{% endblock %}
+
+
+{% block content %}
+<h1>Event Project</h1>
+<p>Bla blubb</p>
+
+
+<h2>Vorhandene Kategorien</h2>
+<ul>
+    {% for category in categories %}
+    <li>
+        <a href="{% url 'events:category' category.pk %}">{{category}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

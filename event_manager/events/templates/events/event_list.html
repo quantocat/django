@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Event-Übersicht
+{% endblock %}
+
+
+{% block content %}
+<ul>
+    <!-- im Template steht die Liste als object_list zur Verfügung-->
+
+    {% if object_list %}
+
+        {% for object in object_list %}
+        <li>
+            <a href="{% url 'events:event' object.pk %}">{{object}} [{{object.category}}]</a>
+            (von {{object.author.username}})
+        </li>
+        {% endfor %}
+
+    {% else %}
+        <li>Keine Objekte vorhanden</li>
+    {% endif %}
+</ul>
+{% endblock %}

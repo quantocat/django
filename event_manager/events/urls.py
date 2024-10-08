@@ -3,9 +3,20 @@ Events URLs
 
 http://127.0.0.1:8000/events/hello
 """
-from django.urls import path 
-from .views import hello_world
+
+from django.urls import path
+from . import views
+
+app_name = "events"  # immer anlegen, ist der Name der app
+# events:category
 
 urlpatterns = [
-    path("hello", hello_world, name="hello_world"),
+    path("hello", views.hello_world, name="hello_world"),
+    path("categories", views.categories, name="categories"),
+    # events/category/3
+    path("category/<int:pk>", views.category, name="category"),
+    # events/
+    # .as_view() immer bei klassenbasierten Views (erzeugt Einstiegs-Funktion)
+    path("", views.EventListView.as_view(), name="events"),
+    path("<int:pk>", views.EventDetailView.as_view(), name="event"),  # /events/3
 ]

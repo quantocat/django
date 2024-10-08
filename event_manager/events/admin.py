@@ -28,14 +28,37 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
 
+    @admin.display(description="Setze Events aktiv")
+    def set_active(self, request, queryset):
+        """Setze alle Objekte des Querysets auf aktiv."""
+        queryset.update(is_active=True)
+
+    @admin.display(description="Setze Events inaktiv")
+    def set_inactive(self, request, queryset):
+        """Setze alle Objekte des Querysets auf inaktiv."""
+        queryset.update(is_active=False)
+
     search_fields = ("name", "sub_title")  # Suchbox wird erstellt
+    actions = [
+        "set_active",
+        "set_inactive",
+    ]
 
     list_display = (
         "id",
         "name",
         "category",
+        "is_active",
     )
     list_display_links = (
         "id",
         "name",
+    )
+
+    fieldsets = (
+        ("Standard Infos", {"fields": ("name", "date", "category")}),
+        (
+            "Detail Infos",
+            {"fields": ("description", "min_group", "is_active", "sub_title")},
+        ),
     )

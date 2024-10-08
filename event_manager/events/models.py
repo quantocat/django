@@ -1,10 +1,8 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# ruff
-x = (
-    "asdf jösakldjf klsadfj lsdakfj lsajfd lsajdflö jsadlfj saödlfj salfdj"
-    "salfdj ölsadfj sdafj asöldkfj"
-)
+
+User = get_user_model()  # aktuelles User-Model
 
 
 class DateMixin(models.Model):
@@ -44,10 +42,20 @@ class Category(DateMixin):
 class Event(DateMixin):
     """Eventobjekt mit Datum und User."""
 
+    class GroupSize(models.IntegerChoices):
+        BIG = 10
+        SMALL = 2
+
     name = models.CharField(max_length=100, unique=True)
     sub_title = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     date = models.DateTimeField()
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="events",  # bob.events.all()
+    )
+    min_group = models.IntegerField(choices=GroupSize.choices)
 
     # https://docs.djangoproject.com/en/5.1/ref/models/fields/
     category = models.ForeignKey(

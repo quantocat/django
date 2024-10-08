@@ -39,7 +39,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "events",
+    "pages",
 ]
+
+INSTALLED_APPS.extend(
+    [
+        "debug_toolbar",
+    ]
+)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -51,12 +58,21 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+MIDDLEWARE.extend(
+    [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+    ]
+)
+
+INTERNAL_IPS = ("127.0.0.1",)
+
 ROOT_URLCONF = "event_manager.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # hier Pfad zu projektübergreifenden Templates anlegen
+        "DIRS": [BASE_DIR / "event_manager/templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
