@@ -6,6 +6,8 @@ Kategorieübersicht
 
 
 {% block content %}
+<a href="{% url 'events:category_create' %}">neue Kategorie eintragen</a>
+
 <ul>
     {% for category in categories %}
     <li>

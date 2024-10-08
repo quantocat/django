@@ -1,9 +1,10 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpRequest, Http404
 from django.views.generic import ListView, DetailView
 from .models import Category, Event
+from .forms import CategoryForm
 
 
 class EventDetailView(DetailView):
@@ -25,6 +26,43 @@ class EventListView(ListView):
         if suchanfrage:
             return super().get_queryset().filter(name__contains=suchanfrage)
         return super().get_queryset()
+
+
+def category_update(request, pk):
+    """
+    GET & POST: events/3/update
+    """
+    category = get_object_or_404(Category, pk=pk)
+    form = CategoryForm(request.POST or None, instance=category)
+
+    if form.is_valid():
+        form.save()
+        return redirect("events:categories")
+
+    return render(
+        request,
+        "events/category_form.html",
+        {"form": form},
+    )
+
+
+def category_create(request):
+    """
+    GET & POST: events/create
+    """
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save()
+            return redirect("events:categories")
+    else:
+        form = CategoryForm()
+
+    return render(
+        request,
+        "events/category_form.html",
+        {"form": form},
+    )
 
 
 def category(request, pk):

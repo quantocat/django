@@ -12,5 +12,7 @@
 
     <a href="{% url 'events:categories' %}">zurück zur Kategorieübersicht</a><br>
     {{category}}
+    <br>
+    <a href="{% url 'events:category_update' category.pk %}">edit</a>
 
 {% endblock %}

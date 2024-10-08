@@ -15,6 +15,9 @@ urlpatterns = [
     path("categories", views.categories, name="categories"),
     # events/category/3
     path("category/<int:pk>", views.category, name="category"),
+    # events/category
+    path("category", views.category_create, name="category_create"),
+    path("category/<int:pk>/update", views.category_update, name="category_update"),
     # events/
     # .as_view() immer bei klassenbasierten Views (erzeugt Einstiegs-Funktion)
     path("", views.EventListView.as_view(), name="events"),

@@ -1,12 +1,18 @@
 # Projektbeschreibung
-Übungsprojekt Event-Manager im Rahmen des 5-Tages Django-Trainings
-Dozent: Bernd Fischer
+- Übungsprojekt Event-Manager im Rahmen des 5-Tages Django-Trainings
+- Dozent: Bernd Fischer
 
-## Installation
-
+## Dependency Managment mit piptools
     python -m venv env
     ./env/Scripts/activate
-    pip install -r requirements.txt
+    pip install pip-tools
+    pip-sync requirements.txt requirements-dev.txt
+
+## requirments-txt Dateien erstellen
+Dependencies werden ausschließilch in den requirements.in-Dateien festgelegt
+
+    pip-compile requirements.in
+    pip-compile requirements-dev.in 
 
 
 ## Website
