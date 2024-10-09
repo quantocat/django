@@ -9,11 +9,17 @@
     <a href="{% url 'events:events' %}">zurück zur Event-Übersicht</a><br>
     {{object}}
     <p>
+        <a href="{% url 'events:event_delete' object.pk %}">Event löschen</a>
+    </p>
+    <p>
         {{object.sub_title|default:"-"}}
     </p>
 
     <p>
         {{object.description|linebreaks}}
+    </p>
+    <p>
+        {{object.date}}
     </p>
 
 {% endblock %}

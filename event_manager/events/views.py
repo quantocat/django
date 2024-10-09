@@ -1,10 +1,63 @@
-from typing import Any
+import logging
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpRequest, Http404
-from django.views.generic import ListView, DetailView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from .models import Category, Event
-from .forms import CategoryForm
+from .forms import CategoryForm, EventForm
+
+logger = logging.getLogger("django")
+
+
+class EventDeleteView(SuccessMessageMixin, DeleteView):
+    """
+    events/3/delete
+    """
+
+    model = Event
+    success_url = reverse_lazy("events:events")
+    success_message = "Event wurde erfolgreich gelöscht"
+    # Modelname_confirm_delete.html
+
+
+class EventUpdateView(SuccessMessageMixin, UpdateView):
+    """
+    /events/3/update
+    """
+
+    model = Event
+    form_class = EventForm
+    success_message = "Event wurde erfolgreich editiert."
+
+
+class EventCreateView(SuccessMessageMixin, CreateView):
+    """Nach erfolgreicher Erstellung wird an die Addresse von
+    obj.get_absolute_url() weitergeleitet (siehe events/models.py)
+
+    /events/create
+    """
+
+    model = Event
+    form_class = EventForm
+    success_message = "Event wurde erfolgreich angelegt."
+    # event_form.html
+
+    def form_valid(self, form):
+        """Wird aufgerufen, wenn Formular valdide."""
+        # print(
+        #     "message: ", form.cleaned_data["message"]
+        # )  # Zugriff auf Formulardaten ohne Model
+        form.instance.author = self.request.user
+        logger.info("Es wurde der Author hinzugefügt.")
+        return super().form_valid(form)
 
 
 class EventDetailView(DetailView):
@@ -82,7 +135,7 @@ def category(request, pk):
 
 def categories(request) -> HttpResponse:
     """
-    /events/categories
+    /events/categories?x=3
     """
     categories = Category.objects.all()  # categories[0].name
     return render(

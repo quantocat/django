@@ -1,0 +1,222 @@
+[
+    {
+        "model": "events.category",
+        "pk": 2,
+        "fields": {
+            "created_at": "2024-10-07T09:37:46.023Z",
+            "updated_at": "2024-10-08T13:42:23.320Z",
+            "name": "Musik 23",
+            "sub_title": "fsad",
+            "description": "asdf"
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 5,
+        "fields": {
+            "created_at": "2024-10-07T12:21:38.363Z",
+            "updated_at": "2024-10-08T13:39:27.289Z",
+            "name": "Sport",
+            "sub_title": "asdf sss",
+            "description": "asfdsss"
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 6,
+        "fields": {
+            "created_at": "2024-10-08T13:27:07.916Z",
+            "updated_at": "2024-10-08T13:27:07.916Z",
+            "name": "asfd",
+            "sub_title": null,
+            "description": ""
+        }
+    },
+    {
+        "model": "events.category",
+        "pk": 7,
+        "fields": {
+            "created_at": "2024-10-08T13:42:38.075Z",
+            "updated_at": "2024-10-09T07:04:04.075Z",
+            "name": "Computer2",
+            "sub_title": "Nerdstuff",
+            "description": "asfd"
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 3,
+        "fields": {
+            "created_at": "2024-10-07T12:25:13.661Z",
+            "updated_at": "2024-10-09T09:11:06.919Z",
+            "name": "adasfdsd",
+            "sub_title": null,
+            "description": "bld",
+            "date": "2024-10-09T10:25:00Z",
+            "author": 1,
+            "min_group": 2,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 4,
+        "fields": {
+            "created_at": "2024-10-07T12:25:39.648Z",
+            "updated_at": "2024-10-09T08:25:09.403Z",
+            "name": "adsfd",
+            "sub_title": "ab safd sdfa",
+            "description": "asfsfd",
+            "date": "2024-10-12T10:57:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 5,
+        "fields": {
+            "created_at": "2024-10-07T13:35:38.321Z",
+            "updated_at": "2024-10-09T07:54:29.756Z",
+            "name": "tom3",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-11T10:57:00Z",
+            "author": 1,
+            "min_group": 2,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 6,
+        "fields": {
+            "created_at": "2024-10-07T13:35:38.321Z",
+            "updated_at": "2024-10-07T13:35:38.321Z",
+            "name": "bill",
+            "sub_title": null,
+            "description": null,
+            "date": "2024-10-07T13:35:29Z",
+            "author": 1,
+            "min_group": 2,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 7,
+        "fields": {
+            "created_at": "2024-10-08T09:33:21.067Z",
+            "updated_at": "2024-10-09T08:02:43.050Z",
+            "name": "Musik neu",
+            "sub_title": "neuer Untertitle",
+            "description": "sadfsa dfsafd\r\n\r\nasfdsafd sadf sad\r\n\r\nsadfsa afdsadf sdaf",
+            "date": "2024-10-08T09:33:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 8,
+        "fields": {
+            "created_at": "2024-10-09T07:40:18.593Z",
+            "updated_at": "2024-10-09T07:40:18.593Z",
+            "name": "sfda",
+            "sub_title": "asfd",
+            "description": "",
+            "date": "2024-11-14T11:37:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 7,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 9,
+        "fields": {
+            "created_at": "2024-10-09T07:40:47.109Z",
+            "updated_at": "2024-10-09T07:40:47.109Z",
+            "name": "test ab c",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-19T10:43:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 2,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 10,
+        "fields": {
+            "created_at": "2024-10-09T08:05:02.958Z",
+            "updated_at": "2024-10-09T08:05:02.958Z",
+            "name": "sfdasfda",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-25T11:08:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 7,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 11,
+        "fields": {
+            "created_at": "2024-10-09T08:06:20.251Z",
+            "updated_at": "2024-10-09T08:06:20.251Z",
+            "name": "sfdasfdaasdf",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-25T11:08:00Z",
+            "author": 1,
+            "min_group": 10,
+            "category": 7,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 12,
+        "fields": {
+            "created_at": "2024-10-09T09:29:07.755Z",
+            "updated_at": "2024-10-09T09:29:07.755Z",
+            "name": "asfdfd",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-19T12:32:00Z",
+            "author": 1,
+            "min_group": 2,
+            "category": 7,
+            "is_active": true
+        }
+    },
+    {
+        "model": "events.event",
+        "pk": 13,
+        "fields": {
+            "created_at": "2024-10-09T09:33:12.701Z",
+            "updated_at": "2024-10-09T09:33:12.701Z",
+            "name": "test 3",
+            "sub_title": null,
+            "description": "",
+            "date": "2024-10-18T12:35:00Z",
+            "author": 1,
+            "min_group": 2,
+            "category": 7,
+            "is_active": true
+        }
+    }
+]

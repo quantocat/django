@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Event löschen
+{% endblock %}
+
+{% block content %}
+<p>Du willst ein Event löschen!</p>
+<div class="container">
+<div class="row">
+    <div class="col-lg-6">
+
+        <form method="POST">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Wirklich löschen?">
+</div>
+</div>
+</div>
+</form>
+{% endblock %}

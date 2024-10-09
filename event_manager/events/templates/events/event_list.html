@@ -6,6 +6,7 @@ Event-Übersicht
 
 
 {% block content %}
+<a href="{% url 'events:event_create' %}">Event hinzufügen</a><br>
 <ul>
     <!-- im Template steht die Liste als object_list zur Verfügung-->
 
@@ -14,7 +15,8 @@ Event-Übersicht
         {% for object in object_list %}
         <li>
             <a href="{% url 'events:event' object.pk %}">{{object}} [{{object.category}}]</a>
-            (von {{object.author.username}})
+            (von {{object.author.username}}) 
+            [<a href="{% url 'events:event_update' object.pk %}">edit</a>]
         </li>
         {% endfor %}
 

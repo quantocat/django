@@ -22,4 +22,10 @@ urlpatterns = [
     # .as_view() immer bei klassenbasierten Views (erzeugt Einstiegs-Funktion)
     path("", views.EventListView.as_view(), name="events"),
     path("<int:pk>", views.EventDetailView.as_view(), name="event"),  # /events/3
+    # /events/create
+    path("create", views.EventCreateView.as_view(), name="event_create"),
+    # /events/3/update
+    path("<int:pk>/update", views.EventUpdateView.as_view(), name="event_update"),
+    # /events/3/delete
+    path("<int:pk>/delete", views.EventDeleteView.as_view(), name="event_delete"),
 ]

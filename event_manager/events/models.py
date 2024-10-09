@@ -1,5 +1,10 @@
+from functools import partial
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse  # löst die URL auf
+from django.core.validators import MinLengthValidator
+
+from .validators import date_in_future, bad_word_filter
 
 
 User = get_user_model()  # aktuelles User-Model
@@ -46,10 +51,20 @@ class Event(DateMixin):
         BIG = 10
         SMALL = 2
 
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(
+        max_length=100,
+        unique=True,
+        validators=[MinLengthValidator(3)],
+    )
     sub_title = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-    date = models.DateTimeField()
+    description = models.TextField(
+        null=True,
+        blank=True,
+        validators=[
+            partial(bad_word_filter, ["evil", "blöd"]),
+        ],
+    )
+    date = models.DateTimeField(validators=[date_in_future])
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -64,6 +79,10 @@ class Event(DateMixin):
         related_name="events",
     )  # Related Manager. sport.events.all()
     is_active = models.BooleanField(default=True)
+
+    def get_absolute_url(self):
+        """Das ist die Route zur Heimatseite / Detailseite."""
+        return reverse("events:event", kwargs={"pk": self.pk})
 
     def __str__(self) -> str:
         return self.name
