@@ -10,6 +10,5 @@
 
 /events/categories
 /events/category/3
-
 /events
 /events/3
