@@ -18,6 +18,7 @@ Dependencies werden ausschließilch in den requirements.in-Dateien festgelegt
 ## Website
 - https://ccbv.co.uk/
 - https://docs.djangoproject.com/en/5.1/intro/tutorial01/  (Django Tutorial durchführen)
+- https://yopad.eu/p/django
 
 
 ## VS-Code Extensions für Django
