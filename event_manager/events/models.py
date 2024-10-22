@@ -80,6 +80,14 @@ class Event(DateMixin):
     )  # Related Manager. sport.events.all()
     is_active = models.BooleanField(default=True)
 
+    def get_related_events(self):
+        """zu einem Event ähnliche Events zurückgeben."""
+        related_events = Event.objects.filter(
+            min_group=self.min_group, 
+            category=self.category
+        )
+        return related_events.exclude(pk=self.pk)
+
     def get_absolute_url(self):
         """Das ist die Route zur Heimatseite / Detailseite."""
         return reverse("events:event", kwargs={"pk": self.pk})

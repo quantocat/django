@@ -12,9 +12,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-%bl*m8iqftykpvcpw5o7m308*2y=hefq=44d*%6&a0=&nyd64p"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*", "web.de"]
+ALLOWED_HOSTS = ["*"]
 
 
 MESSAGE_TAGS = {
@@ -48,6 +48,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ("bootstrap5",)
 INSTALLED_APPS.extend(
     [
         "debug_toolbar",
+        "django_extensions",
     ]
 )
 
@@ -121,6 +122,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Login / Logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

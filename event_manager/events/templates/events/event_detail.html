@@ -8,9 +8,13 @@
 
     <a href="{% url 'events:events' %}">zurück zur Event-Übersicht</a><br>
     {{object}}
+
+    {% if user == object.author %}
     <p>
         <a href="{% url 'events:event_delete' object.pk %}">Event löschen</a>
     </p>
+    {% endif %}
+
     <p>
         {{object.sub_title|default:"-"}}
     </p>
@@ -21,5 +25,15 @@
     <p>
         {{object.date}}
     </p>
+
+    <ul>
+    {% for related in object.get_related_events %}
+        <li>
+            <a href="{{related.get_absolute_url}}">
+            {{related}}
+            </a>
+        </li>
+    {% endfor %}
+    <ul>
 
 {% endblock %}

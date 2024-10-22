@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.http import HttpResponse, HttpRequest, Http404
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic import (
     ListView,
     DetailView,
@@ -17,7 +19,24 @@ from .forms import CategoryForm, EventForm
 logger = logging.getLogger("django")
 
 
-class EventDeleteView(SuccessMessageMixin, DeleteView):
+class IsModerator(UserPassesTestMixin):
+    """Prüfen, ob User der Moderatoren-Gruppe angehört."""
+    def test_func(self) -> bool:
+        return self.request.user.groups.filter(name="moderatoren").exists()
+
+
+class UserIsOwnerMixin(UserPassesTestMixin):
+    def test_func(self) -> bool:
+        """Prüfen, ob einloggter User gleich Author des Events."""
+        return any(
+            [
+            self.request.user == self.get_object().author,
+            self.request.user.is_superuser  # ist Admin
+            ]
+        )
+
+
+class EventDeleteView(UserIsOwnerMixin, SuccessMessageMixin, DeleteView):
     """
     events/3/delete
     """
@@ -28,7 +47,7 @@ class EventDeleteView(SuccessMessageMixin, DeleteView):
     # Modelname_confirm_delete.html
 
 
-class EventUpdateView(SuccessMessageMixin, UpdateView):
+class EventUpdateView(UserIsOwnerMixin, SuccessMessageMixin, UpdateView):
     """
     /events/3/update
     """
@@ -37,8 +56,10 @@ class EventUpdateView(SuccessMessageMixin, UpdateView):
     form_class = EventForm
     success_message = "Event wurde erfolgreich editiert."
 
+    
 
-class EventCreateView(SuccessMessageMixin, CreateView):
+
+class EventCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """Nach erfolgreicher Erstellung wird an die Addresse von
     obj.get_absolute_url() weitergeleitet (siehe events/models.py)
 
@@ -65,7 +86,7 @@ class EventDetailView(DetailView):
     # event_detail.html
 
 
-class EventListView(ListView):
+class EventListView(LoginRequiredMixin, ListView):
     model = Event
     queryset = Event.objects.select_related("category", "author").all()
     # generische Name events/event_list.html
@@ -99,6 +120,7 @@ def category_update(request, pk):
     )
 
 
+@login_required()
 def category_create(request):
     """
     GET & POST: events/create

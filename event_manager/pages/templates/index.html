@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load pagestags %}
 
 {% block title %}
 Event Project Homepage
@@ -7,8 +8,11 @@ Event Project Homepage
 
 {% block content %}
 <h1>Event Project</h1>
-<p>Bla blubb</p>
 
+
+{% if request.user|has_group:"moderatoren" %}
+<a href="{% url 'events:events' %}">Events auflisten</a><br>
+{% endif %}
 
 <h2>Vorhandene Kategorien</h2>
 <ul>

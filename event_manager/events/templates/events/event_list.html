@@ -16,7 +16,11 @@ Event-Übersicht
         <li>
             <a href="{% url 'events:event' object.pk %}">{{object}} [{{object.category}}]</a>
             (von {{object.author.username}}) 
-            [<a href="{% url 'events:event_update' object.pk %}">edit</a>]
+
+            {% if user == object.author or user.is_superuser %}
+                [<a href="{% url 'events:event_update' object.pk %}">edit</a>]
+            {% endif %}
+
         </li>
         {% endfor %}
 
@@ -24,4 +28,6 @@ Event-Übersicht
         <li>Keine Objekte vorhanden</li>
     {% endif %}
 </ul>
+
+
 {% endblock %}
