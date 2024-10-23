@@ -1,5 +1,5 @@
 """
-Modul für das Testen von GET-Requests
+Modul für das Testen von GET-Requests (Integrationstests)
 """
 from http import HTTPStatus
 from django.utils import timezone

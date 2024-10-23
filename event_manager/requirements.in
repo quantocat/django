@@ -2,3 +2,7 @@ Django==5.1.1
 django-crispy-forms
 crispy-bootstrap5
 whitenoise
+django-environ
+djangorestframework
+drf-spectacular
+drf-spectacular-sidecar

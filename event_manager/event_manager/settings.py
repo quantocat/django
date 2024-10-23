@@ -1,20 +1,20 @@
 from pathlib import Path
 from django.contrib.messages import constants as messages
+from event_manager.env import env, BASE_DIR
+# from .ldap_settings import * 
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-%bl*m8iqftykpvcpw5o7m308*2y=hefq=44d*%6&a0=&nyd64p"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 
 MESSAGE_TAGS = {
@@ -39,18 +39,15 @@ INSTALLED_APPS = [
     "pages",
     "crispy_forms",
     "crispy_bootstrap5",
+    "rest_framework",
+    "rest_framework.authtoken",
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
 ]
 
 # siehe https://djangoheroes.spielprinzip.com/working_with_forms/working_with_forms.html
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = ("bootstrap5",)
-
-INSTALLED_APPS.extend(
-    [
-        "debug_toolbar",
-        "django_extensions",
-    ]
-)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -63,13 +60,46 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-MIDDLEWARE.extend(
-    [
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
-    ]
-)
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    ),
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
 
-INTERNAL_IPS = ("127.0.0.1",)
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Event Manager API",
+    "DESCRIPTION": "eine Api-Beschreibungen für die Event-Manager Applikation",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    # "SERVE_AUTHENTICATION": ["rest_framework.authentication.SessionAuthentication"],
+    # "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAuthenticated"],
+    # OTHER SETTINGS
+}
+
+if DEBUG:
+    INSTALLED_APPS.extend(
+        [
+            "debug_toolbar",
+            "django_extensions",
+        ]
+    )
+
+    MIDDLEWARE.extend(
+        [
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+    )
+
+    INTERNAL_IPS = ("127.0.0.1",)
+
 
 ROOT_URLCONF = "event_manager.urls"
 
@@ -123,8 +153,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Login / Logout
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

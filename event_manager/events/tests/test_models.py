@@ -30,5 +30,5 @@ class EventModelTest(TestCase):
 
     def test_invalid_event_name_raises_error(self):
         """Prüfen, ob ein invalider Name einen Fehler erhebt."""
-        self.event.name = "aabba"
+        self.event.name = "a"
         self.assertRaises(ValidationError, self.event.full_clean)

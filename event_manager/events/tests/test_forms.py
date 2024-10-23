@@ -1,5 +1,5 @@
 """
-Modul für das Testen von POSt-Request (via forms)
+Modul für das Testen von POSt-Request (via forms) (Integrationstests)
 """
 from http import HTTPStatus
 from django.utils import timezone
